@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: PacketHandlers.cs 1051 2013-03-12 18:19:07Z mark@runuo.com $
+ *   $Id: PacketHandlers.cs 1064 2013-05-28 17:44:07Z mark@runuo.com $
  *
  ***************************************************************************/
 
@@ -1012,11 +1012,28 @@ namespace Server.Network
 			Mobile from = state.Mobile;
 
 			if ( dest.IsMobile )
+			{
 				from.Drop( World.FindMobile( dest ), loc );
+			}
 			else if ( dest.IsItem )
-				from.Drop( World.FindItem( dest ), loc );
+			{
+				Item item = World.FindItem( dest );
+
+				if ( item is BaseMulti && ((BaseMulti)item).AllowsRelativeDrop )
+				{
+					loc.m_X += item.X;
+					loc.m_Y += item.Y;
+					from.Drop( loc );
+				}
+				else
+				{
+					from.Drop( item, loc );
+				}
+			}
 			else
+			{
 				from.Drop( loc );
+			}
 		}
 
 		public static void DropReq6017( NetState state, PacketReader pvSrc )
@@ -1033,11 +1050,28 @@ namespace Server.Network
 			Mobile from = state.Mobile;
 
 			if ( dest.IsMobile )
+			{
 				from.Drop( World.FindMobile( dest ), loc );
+			}
 			else if ( dest.IsItem )
-				from.Drop( World.FindItem( dest ), loc );
+			{
+				Item item = World.FindItem( dest );
+
+				if ( item is BaseMulti && ((BaseMulti)item).AllowsRelativeDrop )
+				{
+					loc.m_X += item.X;
+					loc.m_Y += item.Y;
+					from.Drop( loc );
+				}
+				else
+				{
+					from.Drop( item, loc );
+				}
+			}
 			else
+			{
 				from.Drop( loc );
+			}
 		}
 
 		public static void ConfigurationFile( NetState state, PacketReader pvSrc )

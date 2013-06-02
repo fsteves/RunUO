@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Main.cs 1059 2013-05-09 21:36:54Z mark@runuo.com $
+ *   $Id: Main.cs 1064 2013-05-28 17:44:07Z mark@runuo.com $
  *
  ***************************************************************************/
 
@@ -509,10 +509,8 @@ namespace Server
 
 				long sample = 0;
 
-				while( !m_Closing )
+				while( m_Signal.WaitOne() )
 				{
-					m_Signal.WaitOne( 10, false );
-
 					Mobile.ProcessDeltaQueue();
 					Item.ProcessDeltaQueue();
 

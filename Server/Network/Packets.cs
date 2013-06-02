@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Packets.cs 1051 2013-03-12 18:19:07Z mark@runuo.com $
+ *   $Id: Packets.cs 1064 2013-05-28 17:44:07Z mark@runuo.com $
  *
  ***************************************************************************/
 
@@ -4389,6 +4389,8 @@ namespace Server.Network
 
 		public void OnSend()
 		{
+			Core.Set();
+
 			if ( (m_State & (State.Acquired | State.Static)) == 0 )
 				Free();
 		}
