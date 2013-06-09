@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Mobile.cs 1059 2013-05-09 21:36:54Z mark@runuo.com $
+ *   $Id: Mobile.cs 1067 2013-06-07 01:04:35Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -2784,8 +2784,13 @@ namespace Server
 			{
 				m_ContextMenu = value;
 
-				if( m_ContextMenu != null )
-					Send( new DisplayContextMenu( m_ContextMenu ) );
+				if ( m_ContextMenu != null && m_NetState != null )
+				{
+					if ( m_NetState.NewHaven )
+						Send( new DisplayContextMenu( m_ContextMenu ) );
+					else
+						Send( new DisplayContextMenuOld( m_ContextMenu ) );
+				}
 			}
 		}
 
@@ -3602,7 +3607,7 @@ namespace Server
 
 		private IAccount m_Account;
 
-		[CommandProperty( AccessLevel.Counselor, AccessLevel.Owner )]
+		[CommandProperty( AccessLevel.GameMaster, AccessLevel.Owner )]
 		public IAccount Account
 		{
 			get

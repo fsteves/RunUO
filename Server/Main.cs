@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Main.cs 1064 2013-05-28 17:44:07Z mark@runuo.com $
+ *   $Id: Main.cs 1065 2013-06-02 13:12:09Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -200,6 +200,11 @@ namespace Server
 		public static bool SA
 		{
 			get { return m_Expansion >= Expansion.SA; }
+		}
+
+		public static bool HS
+		{
+			get { return m_Expansion >= Expansion.HS; }
 		}
 
 		#endregion

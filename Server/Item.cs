@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Item.cs 1058 2013-05-07 19:19:24Z xavier@runuo.com $
+ *   $Id: Item.cs 1065 2013-06-02 13:12:09Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -1508,7 +1508,8 @@ namespace Server
 		{
 			get
 			{
-				return (Movable && Visible && Spawner == null);
+				// TODO: Make item decay an option on the spawner
+				return (Movable && Visible/* && Spawner == null*/);
 			}
 		}
 

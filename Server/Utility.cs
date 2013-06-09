@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Utility.cs 1003 2013-02-03 01:05:17Z eos $
+ *   $Id: Utility.cs 1065 2013-06-02 13:12:09Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -829,6 +829,11 @@ namespace Server
 		public static int Random( int count )
 		{
 			return m_Random.Next( count );
+		}
+
+		public static void RandomBytes( byte[] buffer )
+		{
+			m_Random.NextBytes( buffer );
 		}
 
 		#region Random Hues

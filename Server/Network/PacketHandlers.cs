@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: PacketHandlers.cs 1064 2013-05-28 17:44:07Z mark@runuo.com $
+ *   $Id: PacketHandlers.cs 1066 2013-06-03 14:54:07Z kraz@runuo.com $
  *
  ***************************************************************************/
 
@@ -1125,6 +1125,11 @@ namespace Server.Network
 					{
 						// User pressed escape
 						t.Cancel( from, TargetCancelType.Canceled );
+					}
+					else if ( t.TargetID != targetID )
+					{
+						// Sanity, prevent fake target
+						return;
 					}
 					else
 					{
