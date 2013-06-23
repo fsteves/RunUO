@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Mobile.cs 1067 2013-06-07 01:04:35Z eos@runuo.com $
+ *   $Id: Mobile.cs 1070 2013-06-16 01:24:45Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -2786,7 +2786,8 @@ namespace Server
 
 				if ( m_ContextMenu != null && m_NetState != null )
 				{
-					if ( m_NetState.NewHaven )
+					// Old packet is preferred until assistants catch up
+					if ( m_NetState.NewHaven && m_ContextMenu.RequiresNewPacket )
 						Send( new DisplayContextMenu( m_ContextMenu ) );
 					else
 						Send( new DisplayContextMenuOld( m_ContextMenu ) );

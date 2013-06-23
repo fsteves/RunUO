@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Main.cs 1065 2013-06-02 13:12:09Z eos@runuo.com $
+ *   $Id: Main.cs 1072 2013-06-20 15:56:59Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -282,15 +282,11 @@ namespace Server
 					{
 					}
 
-					if ( m_Service ) {
-						Console.WriteLine( "This exception is fatal." );
-					} else {
-						Console.WriteLine( "This exception is fatal, press return to exit" );
-						Console.ReadLine();
-					}
+					Console.WriteLine( "This exception is fatal, press return to exit" );
+					Console.ReadLine();
 				}
 
-				m_Closing = true;
+				Kill();
 			}
 		}
 
@@ -494,7 +490,7 @@ namespace Server
 
 			ScriptCompiler.Invoke( "Initialize" );
 
-			MessagePump messagePump = new MessagePump();
+			MessagePump messagePump = m_MessagePump = new MessagePump();
 
 			timerThread.Start();
 
