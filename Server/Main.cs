@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Main.cs 1072 2013-06-20 15:56:59Z eos@runuo.com $
+ *   $Id: Main.cs 1075 2013-09-04 23:07:39Z mark@runuo.com $
  *
  ***************************************************************************/
 
@@ -507,11 +507,14 @@ namespace Server
 
 				const int sampleInterval = 100;
 				const float ticksPerSecond = (float)(TimeSpan.TicksPerSecond * sampleInterval);
+				TimeSpan _oneMS = TimeSpan.FromMilliseconds( 1 );
 
 				long sample = 0;
 
-				while( m_Signal.WaitOne() )
+				while( !m_Closing )
 				{
+					m_Signal.WaitOne( _oneMS );
+
 					Mobile.ProcessDeltaQueue();
 					Item.ProcessDeltaQueue();
 

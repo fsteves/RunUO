@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: NetState.cs 1069 2013-06-08 23:18:21Z eos@runuo.com $
+ *   $Id: NetState.cs 1078 2013-09-06 06:55:31Z mark@runuo.com $
  *
  ***************************************************************************/
 
@@ -1040,6 +1040,9 @@ namespace Server.Network {
 		}
 
 		public static void TraceException( Exception ex ) {
+			if (!Core.Debug)
+				return;
+
 			try {
 				using ( StreamWriter op = new StreamWriter( "network-errors.log", true ) ) {
 					op.WriteLine( "# {0}", DateTime.Now );

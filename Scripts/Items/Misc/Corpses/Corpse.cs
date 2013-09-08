@@ -527,7 +527,8 @@ namespace Server.Items
 			return c;
 		}
 
-		public override bool IsPublicContainer{ get{ return true; } }
+		// Why was this public?
+		// public override bool IsPublicContainer{ get{ return true; } }
 
 		public Corpse( Mobile owner, List<Item> equipItems ) : this( owner, null, null, equipItems )
 		{
@@ -866,10 +867,18 @@ namespace Server.Items
 		{
 			base.SendInfoTo( state, sendOplPacket );
 
-			if ( ItemID == 0x2006 )
+			if (((Body)Amount).IsHuman && ItemID == 0x2006)
 			{
-				state.Send( new CorpseContent( state.Mobile, this ) );
-				state.Send( new CorpseEquip( state.Mobile, this ) );
+				if (state.ContainerGridLines)
+				{
+					state.Send(new CorpseContent6017(state.Mobile, this));
+				}
+				else
+				{
+					state.Send(new CorpseContent(state.Mobile, this));
+				}
+
+				state.Send(new CorpseEquip(state.Mobile, this));
 			}
 		}
 
