@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Packets.cs 1074 2013-08-20 16:17:01Z eos@runuo.com $
+ *   $Id: Packets.cs 1080 2013-09-21 23:28:29Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -3927,8 +3927,9 @@ namespace Server.Network
 		AdvancedMacros	= 1 << 19,
 		AutoRemount		= 1 << 20,
 		AutoBandage		= 1 << 21,
-		BuffChecks		= 1 << 22, // Buff bar checks for macros
+		EnemyTargetShare	= 1 << 22,
 		FilterSeason	= 1 << 23,
+		SpellTargetShare	= 1 << 24,
 
 		All				= ulong.MaxValue
 	}
