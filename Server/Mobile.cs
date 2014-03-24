@@ -5,7 +5,7 @@
  *   copyright            : (C) The RunUO Software Team
  *   email                : info@runuo.com
  *
- *   $Id: Mobile.cs 1074 2013-08-20 16:17:01Z eos@runuo.com $
+ *   $Id: Mobile.cs 1081 2014-03-24 17:47:43Z eos@runuo.com $
  *
  ***************************************************************************/
 
@@ -4534,6 +4534,8 @@ namespace Server
 						{
 							if( p == null )
 							{
+								// Use location instead of mobile, this way we can accurately check sameLoc for SA clients
+								IEntity src = new Entity( Serial.Zero, new Point3D( m_Location.X, m_Location.Y, m_Location.Z + 12 ), m_Map );
 								IEntity trg;
 
 								if( root == null )
@@ -4541,10 +4543,10 @@ namespace Server
 								else
 									trg = new Entity( ((Item)root).Serial, ((Item)root).Location, map );
 
-								if ( m_Location == trg.Location )
+								if ( src.Location == trg.Location )
 									sameLoc = true;
 
-								p = Packet.Acquire( new DragEffect( this, trg, item.ItemID, item.Hue, item.Amount ) );
+								p = Packet.Acquire( new DragEffect( src, trg, item.ItemID, item.Hue, item.Amount ) );
 							}
 
 							if ( ns.StygianAbyss && sameLoc )
@@ -8158,6 +8160,11 @@ namespace Server
 					OnNetStateChanged();
 				}
 			}
+		}
+
+		public NetState RawNetState
+		{
+			get { return m_NetState; }
 		}
 
 		public virtual bool CanSee( object o )
